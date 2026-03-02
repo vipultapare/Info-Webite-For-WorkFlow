@@ -1,0 +1,35 @@
+name: workflow
+
+on:
+  push: 
+    branches: [main]
+  workflow_dispatch:
+
+permissipons:
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url:  ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Github pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload Static Files
+        uses: actions/upload-pages-artifact@v4
+        with:
+           path: "."
+      
+      - name: Deploy to github pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
