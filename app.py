@@ -1,25 +1,30 @@
-from flask import Flask, render_template, request
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 
-@app.route('/')
-def home():
-    return render_template('main.html')
+@app.route("/")
+def hello():
+    """Return a greeting message."""
+    return jsonify({"message": "Hello from Docker!"})
 
 
-@app.route('/submit', methods=['POST'])
-def submit():
-    name = request.form.get('name')
-    email = request.form.get('email')
-    message = request.form.get('message')
-    return render_template(
-        'result.html',
-        name=name,
-        email=email,
-        message=message
-    )
+@app.route("/health")
+def health_check():
+    """Health check endpoint."""
+    return jsonify({"status": "healthy"}), 200
 
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+@app.route("/api/data")
+def get_data():
+    """Return sample data."""
+    data = {
+        "id": 1,
+        "name": "Sample Data",
+        "status": "active"
+    }
+    return jsonify(data), 200
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
