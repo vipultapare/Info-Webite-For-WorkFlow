@@ -13,7 +13,6 @@ def submit():
     name = request.form.get('name')
     email = request.form.get('email')
     message = request.form.get('message')
-
     return render_template(
         'result.html',
         name=name,
