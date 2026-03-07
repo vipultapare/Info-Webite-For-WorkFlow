@@ -23,8 +23,8 @@ jobs:
           context: .
           push: true
           tags: |
-             ${{ vars.DOCKERHUB_USER }}/${{ vars.GITHUB_REPO }}:${{ github.GITHUBHEAD_REF }}
-              ${{ vars.DOCKERHUB_USER }}/${{ vars.GITHUB_REPO }}:${{ github.GITHUB_SHA }}
+             ${{ vars.DOCKERHUB_USER }}/${{ vars.GITHUB_REPO }}:${{ github.ref }}
+              ${{ vars.DOCKERHUB_USER }}/${{ vars.GITHUB_REPO }}:${{ github.sha }}
 
         
 
